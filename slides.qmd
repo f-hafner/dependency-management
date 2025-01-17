@@ -1,5 +1,5 @@
 ---
-title: "Dependency management in R and Python"
+title: "Dependency Management in R and Python"
 author: "Flavio Hafner"
 date: 01/30/2025
 format: 
@@ -11,36 +11,34 @@ editor: visual
 
 ## Why track dependencies
 
-- You want that your code still runs in 2 years
-  - Your dependencies' functionality may change; ther may be bug fixes
-- One project may lock the version for a specific package
-  - But you may want to use newer versions where possible in other projects
-- Make your tools portable
-  - For yourself
-  - For your co-authors
+-   You want that your code still runs in 2 years
+    -   Your dependencies' functionality may change; ther may be bug fixes
+-   One project may lock the version for a specific package
+    -   But you may want to use newer versions where possible in other projects
+-   Make your tools portable
+    -   For yourself
+    -   For your co-authors
 
 <!-- do not want to install each package separately, try if the code runs, and repeat -->
 
 ## The high-level idea
 
 | DIY Project | R/Python Project |
-|------------------------------------|------------------------------------|
+|----|----|
 | 🏪 Hardware store | Repository (CRAN, PyPI) |
 | 🗄 The storage shelf in your garage | The folder with Python/R libraries |
 | 🧰 Toolboxes (the drill box, the box of screwdrivers) | Packages (ggplot2, etc.) |
 | 🪑 Workbench | Environment: `renv`, `venv` |
 
-
 ## The environment is an isolated workspace with all tools
 
-- An environment is defined by a file with metadata on
-  - Which packages, versions, from where
-  - From where (repository, github)
-- Metadata are stored in requirements and lock files
-  - They allow anyone to recreate the dependencies in the same way
-- The metadata should be under version control
-  - So that you can track changes and share with others
-
+-   An environment is defined by a file with metadata on
+    -   Which packages, which versions, from where
+    -   From where (repository, github)
+-   Metadata are stored in requirements and lock files
+    -   They allow anyone to recreate the dependencies in the same way
+-   The metadata should be under version control
+    -   So that you can track changes and share with others
 
 ::: {.section .transition-slide}
 # R: Using `renv`
@@ -48,50 +46,52 @@ editor: visual
 
 ## Create a new project in RStudio
 
-1. Install `renv` globally with 
+1.  Install `renv` globally with
 
-```R
+``` r
 install.packages("renv")
 ```
 
-2. Create new project with version control (git)\
+2.  Create new project with version control (git)\
     (File -\> New Project -\> Version Control -\> Git)
-3. Open the project in a new session
-
-
-
+3.  Open the project in a new session
 
 ## Install and track packages with `renv`
 
-4. Attach `renv` to your R session with 
-```R
+4.  Attach `renv` to your R session with
+
+``` r
 library(renv)
 ```
-5. Initialize the renv
-```R
+
+5.  Initialize the renv
+
+``` r
 renv::init(bare = TRUE)
 ```
 
-This creates  TODO: show in steps
+This creates TODO: show in steps
 
-- `renv/` -- A new folder that serves as the **library** of packages for your project.
-- `.Rprofile` -- This file makes sure that once `renv` is turned on for a project, it stays on.
+-   `renv/` -- A new folder that serves as the **library** of packages for your project.
+-   `.Rprofile` -- This file makes sure that once `renv` is turned on for a project, it stays on.
 
 <!-- 6. Check that R looks for packages in the right place: -->
-<!-- ```{r, echo=TRUE} -->
-<!-- .libPaths()[1] -->
-<!-- ``` -->
 
+<!-- ```{r, echo=TRUE} -->
+
+<!-- .libPaths()[1] -->
+
+<!-- ``` -->
 
 ## Create lock file to log project state
 
-```R
+``` r
 renv::snapshot()
 ```
 
 yields something like
 
-```json
+``` json
 {
   "R": {
     "Version": "4.4.2",
@@ -118,129 +118,115 @@ yields something like
 }
 ```
 
+## The lock file records dependencies only when used in scripts:
 
-## The lock file records dependencies only when used in scripts: 
+1.  Install new packages with
 
-1. Install new packages with 
-```R
+``` r
 renv::install(dplyr)
 ```
 
-2. Use it in a script
-```R
+2.  Use it in a script
+
+``` r
 library(dplyr) # or require(dplyr)
 ```
 
-3. Update lock file
-```R
+3.  Update lock file
+
+``` r
 renv::snapshot()
 ```
 
 ## Restoring and checking
 
-![Source: rstudio.github.io](renv.png){width=50%}
-
-
-
-
+![Source: rstudio.github.io](renv.png){width="50%"}
 
 ::: {.section .transition-slide}
 # Python: Using `venv` and `pip`
 
-![Python Environment Hell from XKCD (Creative Commons Attribution-NonCommercial 2.5 License)](python-environment-hell.png){width=50%}
-
-
+![Python Environment Hell from XKCD (Creative Commons Attribution-NonCommercial 2.5 License)](python-environment-hell.png){width="50%"}
 :::
 
-## Overview 
+## Overview
 
-- PyPI is the Python Package Index, the analogue to R's CRAN
-- Many tools to interact with PyPI and they achieve similar things
-- `pip` + `venv` is available by default for Python 3.3+
-
-
-
-
-
+-   PyPI is the Python Package Index, the analogue to R's CRAN
+-   `pip` is the Python package manager and interacts with PyPI
+    -   Other tools do the same job
+-   `pip` + `venv` are available by default for Python 3.3+
 
 ## Getting started
 
 Use the command line: a terminal or from an IDE (VS Code)
 
-&nbsp;
-
 Make sure you can invoke Python
-```bash
+
+``` bash
 $ python3 --version # on Mac/Linux
 $ python --version # on Windows — Windows installation comes with a python.exe file rather than a python3.exe file 
 ```
 
 ## Creating the virtual environment
 
-```bash
+``` bash
 $ python3 -m venv venv
 ```
 
 What does this do?
 
-- Creates a folder `venv` to which packages are installed
-- The `-m` flag calls the `main` part of the `venv` module (not so important)
-
+-   Creates a folder `venv` to which packages are installed
+-   The `-m` flag calls the `main` part of the `venv` module (not so important)
 
 Activate the virtual environment
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ## Windows
 
-```powershell
+``` powershell
 $ source venv/Scripts/activate
 (venv) $
 ```
 
 ## Mac/Linux
 
-```bash
+``` bash
 $ source venv/bin/activate
 (venv) $
 ```
-
 :::
-
 
 ## Install packages with pip
 
-```bash
+``` bash
 (venv) $ python3 -m pip install numpy
 (venv) $ python3 -m pip install matplotlib
 ```
 
 To display information about installed packages
 
-```bash
+``` bash
 (venv) $ python3 -m pip show numpy
 ```
 
 To display information about all installed packages
 
-```bash
+``` bash
 (venv) $ python3 -m pip list
 ```
 
 ## Requirement files
 
-```bash
+``` bash
 (venv) $ python3 -m pip freeze > requirements.txt
 ```
 
 We can inspect the requirements file
 
-```bash
+``` bash
 (venv) $ cat requirements.txt
 ```
 
-
-```output
+``` output
 contourpy==1.2.0
 cycler==0.12.1
 fonttools==4.45.0
@@ -256,71 +242,68 @@ six==1.16.0
 
 Restore a environment from requirements:
 
-```bash
+``` bash
 (venv) $ python3 -m pip install -r requirements.txt
 ```
-
 
 ## PyPI vs conda
 
 | PyPI | conda |
-|------------------------------------|------------------------------------|
-|Easy to use & create packages       | Not only Python, can use external libraries |
-|Does not track Python version       | Tracks Python version |
-|Complicated with external libraries | Heavy -- use miniconda/mamba; packaging is harder |
+|----|----|
+| Easy to use & create packages | Not only Python, can use external libraries |
+| Does not track Python version | Tracks Python version |
+| Complicated with external libraries | Heavy -- use miniconda/mamba; packaging is harder |
 
-&nbsp;
-
+ 
 
 ... And try to keep them apart whenever possible
-
 
 ::: {.section .transition-slide}
 # Conclusion
 :::
 
+## Good practices
 
-## Suggested practices
+-   Have the environment inside your project directory
+-   While project is in progress, do not pin versions
 
-- Have the environment inside your project directory (default in R)
-- When changing/updating dependencies, commit often and share with your coauthors
-- While project is in progress, do not pin versions if not necessary 
-
-```bash
+``` bash
 # prefer
 (venv) $ python3 -m pip install numpy
 # over
 (venv) $ python3 -m pip install numpy==1.26.2
 ```
 
+-   But keep track of exact versions and commit often
+    -   Share with you co-authors
+
 ## Other considerations
 
-- Adding dependencies is always a make-or-buy decision
-  - Don't reinvent the wheel -- but sometimes it's necessary 
-- Before adding dependencies, it's good to
-  - Consider different tools for the task 
-  - Does it work as intended?
-  - Check if they are maintained and the size of the user base
-- Be aware of security risks
-  - [CI/CD vulnerability in pytorch](https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/) in 2024 
+-   Adding dependencies is always a make-or-buy decision
+    -   Don't reinvent the wheel -- but sometimes it's necessary
+-   Before adding dependencies, it's good to
+    -   Consider different tools for the task
+    -   Does it work as intended?
+    -   Check if they are maintained and the size of the user base
+-   Be aware of security risks
+    -   [CI/CD vulnerability in pytorch](https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/) in 2024
 
 ## References & further reading
 
 For R:
 
-- [TSB Research Support Team: Intermediate R](https://gitlab.uvt.nl/tsb-rst/intermediate-level-r-course-for-social-sciences)
-- [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html)
+-   [TSB Research Support Team: Intermediate R](https://gitlab.uvt.nl/tsb-rst/intermediate-level-r-course-for-social-sciences)
+-   [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html)
 
 For Python:
 
-- [Code refinery: Reproducible environments and dependencies](https://coderefinery.github.io/python-progression/dependencies/)
-- [Intermediate Research Software Development with Python: virtual environments](https://carpentries-incubator.github.io/python-intermediate-development/12-virtual-environments.html)
+-   [Code refinery: Reproducible environments and dependencies](https://coderefinery.github.io/python-progression/dependencies/)
+-   [Intermediate Research Software Development with Python: virtual environments](https://carpentries-incubator.github.io/python-intermediate-development/12-virtual-environments.html)
 
 ## Hands-on: ideas
 
 TODO: add tiny url for slides
 
-- Start using an environment for an existing project
-- If you're using `venv` or `conda`, try the other in a dummy project
-- If you're using Python `venv`, give `uv` a shot
-
+-   Start using an environment for an existing project
+-   Play around in a dummy project
+    -   If you're using `pip` or `conda`, try the other, or try `uv`
