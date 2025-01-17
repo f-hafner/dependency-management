@@ -1,0 +1,128 @@
+[
+  {
+    "objectID": "slides.html#why-track-dependencies",
+    "href": "slides.html#why-track-dependencies",
+    "title": "Dependency Management in R and Python",
+    "section": "Why track dependencies",
+    "text": "Why track dependencies\n\nYou want that your code still runs in 2 years\n\nYour dependencies’ functionality may change; ther may be bug fixes\n\nOne project may lock the version for a specific package\n\nBut you may want to use newer versions where possible in other projects\n\nMake your tools portable\n\nFor yourself\nFor your co-authors"
+  },
+  {
+    "objectID": "slides.html#the-high-level-idea",
+    "href": "slides.html#the-high-level-idea",
+    "title": "Dependency Management in R and Python",
+    "section": "The high-level idea",
+    "text": "The high-level idea\n\n\n\n\n\n\n\nDIY Project\nR/Python Project\n\n\n\n\n🏪 Hardware store\nRepository (CRAN, PyPI)\n\n\n🗄 The storage shelf in your garage\nThe folder with Python/R libraries\n\n\n🧰 Toolboxes (the drill box, the box of screwdrivers)\nPackages (ggplot2, etc.)\n\n\n🪑 Workbench\nEnvironment: renv, venv"
+  },
+  {
+    "objectID": "slides.html#the-environment-is-an-isolated-workspace-with-all-tools",
+    "href": "slides.html#the-environment-is-an-isolated-workspace-with-all-tools",
+    "title": "Dependency Management in R and Python",
+    "section": "The environment is an isolated workspace with all tools",
+    "text": "The environment is an isolated workspace with all tools\n\nAn environment is defined by a file with metadata on\n\nWhich packages, which versions, from where\nFrom where (repository, github)\n\nMetadata are stored in requirements and lock files\n\nThey allow anyone to recreate the dependencies in the same way\n\nThe metadata should be under version control\n\nSo that you can track changes and share with others"
+  },
+  {
+    "objectID": "slides.html#create-a-new-project-in-rstudio",
+    "href": "slides.html#create-a-new-project-in-rstudio",
+    "title": "Dependency Management in R and Python",
+    "section": "Create a new project in RStudio",
+    "text": "Create a new project in RStudio\n\nInstall renv globally with\n\ninstall.packages(\"renv\")\n\nCreate new project with version control (git)\n(File -&gt; New Project -&gt; Version Control -&gt; Git)\nOpen the project in a new session"
+  },
+  {
+    "objectID": "slides.html#install-and-track-packages-with-renv",
+    "href": "slides.html#install-and-track-packages-with-renv",
+    "title": "Dependency Management in R and Python",
+    "section": "Install and track packages with renv",
+    "text": "Install and track packages with renv\n\nAttach renv to your R session with\n\nlibrary(renv)\n\nInitialize the renv\n\nrenv::init(bare = TRUE)\nThis creates TODO: show in steps\n\nrenv/ – A new folder that serves as the library of packages for your project.\n.Rprofile – This file makes sure that once renv is turned on for a project, it stays on."
+  },
+  {
+    "objectID": "slides.html#create-lock-file-to-log-project-state",
+    "href": "slides.html#create-lock-file-to-log-project-state",
+    "title": "Dependency Management in R and Python",
+    "section": "Create lock file to log project state",
+    "text": "Create lock file to log project state\nrenv::snapshot()\nyields something like\n{\n  \"R\": {\n    \"Version\": \"4.4.2\",\n    \"Repositories\": [\n      {\n        \"Name\": \"CRAN\",\n        \"URL\": \"https://cloud.r-project.org\"\n      }\n    ]\n  },\n  \"Packages\": {\n      \"rlang\": {\n      \"Package\": \"rlang\",\n      \"Version\": \"1.1.4\",\n      \"Source\": \"Repository\",\n      \"Repository\": \"CRAN\",\n      \"Requirements\": [\n        \"R\",\n        \"utils\"\n      ],\n      \"Hash\": \"3eec01f8b1dee337674b2e34ab1f9bc1\"\n    }\n  }\n}"
+  },
+  {
+    "objectID": "slides.html#the-lock-file-records-dependencies-only-when-used-in-scripts",
+    "href": "slides.html#the-lock-file-records-dependencies-only-when-used-in-scripts",
+    "title": "Dependency Management in R and Python",
+    "section": "The lock file records dependencies only when used in scripts:",
+    "text": "The lock file records dependencies only when used in scripts:\n\nInstall new packages with\n\nrenv::install(dplyr)\n\nUse it in a script\n\nlibrary(dplyr) # or require(dplyr)\n\nUpdate lock file\n\nrenv::snapshot()"
+  },
+  {
+    "objectID": "slides.html#restoring-and-checking",
+    "href": "slides.html#restoring-and-checking",
+    "title": "Dependency Management in R and Python",
+    "section": "Restoring and checking",
+    "text": "Restoring and checking\n\nSource: rstudio.github.io"
+  },
+  {
+    "objectID": "slides.html#overview",
+    "href": "slides.html#overview",
+    "title": "Dependency Management in R and Python",
+    "section": "Overview",
+    "text": "Overview\n\nPyPI is the Python Package Index, the analogue to R’s CRAN\npip is the Python package manager and interacts with PyPI\n\nOther tools do the same job\n\npip + venv are available by default for Python 3.3+"
+  },
+  {
+    "objectID": "slides.html#getting-started",
+    "href": "slides.html#getting-started",
+    "title": "Dependency Management in R and Python",
+    "section": "Getting started",
+    "text": "Getting started\nUse the command line: a terminal or from an IDE (VS Code)\nMake sure you can invoke Python\n$ python3 --version # on Mac/Linux\n$ python --version # on Windows — Windows installation comes with a python.exe file rather than a python3.exe file"
+  },
+  {
+    "objectID": "slides.html#creating-the-virtual-environment",
+    "href": "slides.html#creating-the-virtual-environment",
+    "title": "Dependency Management in R and Python",
+    "section": "Creating the virtual environment",
+    "text": "Creating the virtual environment\n$ python3 -m venv venv\nWhat does this do?\n\nCreates a folder venv to which packages are installed\nThe -m flag calls the main part of the venv module (not so important)\n\nActivate the virtual environment\n\nWindowsMac/Linux\n\n\n$ source venv/Scripts/activate\n(venv) $\n\n\n$ source venv/bin/activate\n(venv) $"
+  },
+  {
+    "objectID": "slides.html#install-packages-with-pip",
+    "href": "slides.html#install-packages-with-pip",
+    "title": "Dependency Management in R and Python",
+    "section": "Install packages with pip",
+    "text": "Install packages with pip\n(venv) $ python3 -m pip install numpy\n(venv) $ python3 -m pip install matplotlib\nTo display information about installed packages\n(venv) $ python3 -m pip show numpy\nTo display information about all installed packages\n(venv) $ python3 -m pip list"
+  },
+  {
+    "objectID": "slides.html#requirement-files",
+    "href": "slides.html#requirement-files",
+    "title": "Dependency Management in R and Python",
+    "section": "Requirement files",
+    "text": "Requirement files\n(venv) $ python3 -m pip freeze &gt; requirements.txt\nWe can inspect the requirements file\n(venv) $ cat requirements.txt\ncontourpy==1.2.0\ncycler==0.12.1\nfonttools==4.45.0\nkiwisolver==1.4.5\nmatplotlib==3.8.2\nnumpy==1.26.2\npackaging==23.2\nPillow==10.1.0\npyparsing==3.1.1\npython-dateutil==2.8.2\nsix==1.16.0\nRestore a environment from requirements:\n(venv) $ python3 -m pip install -r requirements.txt"
+  },
+  {
+    "objectID": "slides.html#pypi-vs-conda",
+    "href": "slides.html#pypi-vs-conda",
+    "title": "Dependency Management in R and Python",
+    "section": "PyPI vs conda",
+    "text": "PyPI vs conda\n\n\n\n\n\n\n\nPyPI\nconda\n\n\n\n\nEasy to use & create packages\nNot only Python, can use external libraries\n\n\nDoes not track Python version\nTracks Python version\n\n\nComplicated with external libraries\nHeavy – use miniconda/mamba; packaging is harder\n\n\n\n \n… And try to keep them apart whenever possible"
+  },
+  {
+    "objectID": "slides.html#good-practices",
+    "href": "slides.html#good-practices",
+    "title": "Dependency Management in R and Python",
+    "section": "Good practices",
+    "text": "Good practices\n\nHave the environment inside your project directory\nWhile project is in progress, do not pin versions\n\n# prefer\n(venv) $ python3 -m pip install numpy\n# over\n(venv) $ python3 -m pip install numpy==1.26.2\n\nBut keep track of exact versions and commit often\n\nShare with you co-authors"
+  },
+  {
+    "objectID": "slides.html#other-considerations",
+    "href": "slides.html#other-considerations",
+    "title": "Dependency Management in R and Python",
+    "section": "Other considerations",
+    "text": "Other considerations\n\nAdding dependencies is always a make-or-buy decision\n\nDon’t reinvent the wheel – but sometimes it’s necessary\n\nBefore adding dependencies, it’s good to\n\nConsider different tools for the task\nDoes it work as intended?\nCheck if they are maintained and the size of the user base\n\nBe aware of security risks\n\nCI/CD vulnerability in pytorch in 2024"
+  },
+  {
+    "objectID": "slides.html#references-further-reading",
+    "href": "slides.html#references-further-reading",
+    "title": "Dependency Management in R and Python",
+    "section": "References & further reading",
+    "text": "References & further reading\nFor R:\n\nTSB Research Support Team: Intermediate R\nIntroduction to renv\n\nFor Python:\n\nCode refinery: Reproducible environments and dependencies\nIntermediate Research Software Development with Python: virtual environments"
+  },
+  {
+    "objectID": "slides.html#hands-on-ideas",
+    "href": "slides.html#hands-on-ideas",
+    "title": "Dependency Management in R and Python",
+    "section": "Hands-on: ideas",
+    "text": "Hands-on: ideas\nTODO: add tiny url for slides\n\nStart using an environment for an existing project\nPlay around in a dummy project\n\nIf you’re using pip or conda, try the other, or try uv"
+  }
+]
