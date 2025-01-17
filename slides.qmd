@@ -275,7 +275,7 @@ Restore a environment from requirements.txt:
 ```
 
 -   But keep track of exact versions and commit often
-    -   Share with you co-authors
+    -   Share with your co-authors
 
 ## Other considerations
 
