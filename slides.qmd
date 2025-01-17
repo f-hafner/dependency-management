@@ -37,7 +37,7 @@ editor: visual
     -   From where (repository, github)
 -   Metadata are stored in requirements and lock files
     -   They allow anyone to recreate the dependencies in the same way
--   The metadata should be under version control
+-   This metadata should be under version control
     -   So that you can track changes and share with others
 
 ::: {.section .transition-slide}
