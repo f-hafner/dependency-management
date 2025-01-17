@@ -1,8 +1,11 @@
 ---
-title: "Dependency management in R and python"
+title: "Dependency management in R and Python"
 author: "Flavio Hafner"
 date: 01/30/2025
-format: revealjs
+format: 
+  revealjs:
+    theme: default
+    slide-number: true
 editor: visual
 ---
 
@@ -20,10 +23,10 @@ editor: visual
 
 ## The high-level idea
 
-| DIY Project | R/python Project |
+| DIY Project | R/Python Project |
 |------------------------------------|------------------------------------|
 | 🏪 Hardware store | Repository (CRAN, PyPI) |
-| 🗄 The storage shelf in your garage | The folder with python/R libraries |
+| 🗄 The storage shelf in your garage | The folder with Python/R libraries |
 | 🧰 Toolboxes (the drill box, the box of screwdrivers) | Packages (ggplot2, etc.) |
 | 🪑 Workbench | Environment: `renv`, `venv` |
 
@@ -31,8 +34,7 @@ editor: visual
 ## The environment is an isolated workspace with all tools
 
 - An environment is defined by a file with metadata on
-  - Which packages
-  - Which versions
+  - Which packages, versions, from where
   - From where (repository, github)
 - Metadata are stored in requirements and lock files
   - They allow anyone to recreate the dependencies in the same way
@@ -117,7 +119,7 @@ yields something like
 ```
 
 
-## The lock file only records dependencies only when used in scripts: 
+## The lock file records dependencies only when used in scripts: 
 
 1. Install new packages with 
 ```R
@@ -144,30 +146,163 @@ renv::snapshot()
 
 ::: {.section .transition-slide}
 # Python: Using `venv` and `pip`
+
+![Python Environment Hell from XKCD (Creative Commons Attribution-NonCommercial 2.5 License)](python-environment-hell.png){width=50%}
+
+
+:::
+
+## Overview 
+
+- PyPI is the Python Package Index, the analogue to R's CRAN
+- Many tools to interact with PyPI and they achieve similar things
+- `pip` + `venv` is available by default for Python 3.3+
+
+
+
+
+
+
+## Getting started
+
+Use the command line: a terminal or from an IDE (VS Code)
+
+&nbsp;
+
+Make sure you can invoke Python
+```bash
+$ python3 --version # on Mac/Linux
+$ python --version # on Windows — Windows installation comes with a python.exe file rather than a python3.exe file 
+```
+
+## Creating the virtual environment
+
+```bash
+$ python3 -m venv venv
+```
+
+What does this do?
+
+- Creates a folder `venv` to which packages are installed
+- The `-m` flag calls the `main` part of the `venv` module (not so important)
+
+
+Activate the virtual environment
+
+::: {.panel-tabset}
+
+## Windows
+
+```powershell
+$ source venv/Scripts/activate
+(venv) $
+```
+
+## Mac/Linux
+
+```bash
+$ source venv/bin/activate
+(venv) $
+```
+
 :::
 
 
+## Install packages with pip
+
+```bash
+(venv) $ python3 -m pip install numpy
+(venv) $ python3 -m pip install matplotlib
+```
+
+To display information about installed packages
+
+```bash
+(venv) $ python3 -m pip show numpy
+```
+
+To display information about all installed packages
+
+```bash
+(venv) $ python3 -m pip list
+```
+
+## Requirement files
+
+```bash
+(venv) $ python3 -m pip freeze > requirements.txt
+```
+
+We can inspect the requirements file
+
+```bash
+(venv) $ cat requirements.txt
+```
 
 
+```output
+contourpy==1.2.0
+cycler==0.12.1
+fonttools==4.45.0
+kiwisolver==1.4.5
+matplotlib==3.8.2
+numpy==1.26.2
+packaging==23.2
+Pillow==10.1.0
+pyparsing==3.1.1
+python-dateutil==2.8.2
+six==1.16.0
+```
+
+Restore a environment from requirements:
+
+```bash
+(venv) $ python3 -m pip install -r requirements.txt
+```
 
 
+## PyPI vs conda
 
-## Python: using `venv` and `pip`
+| PyPI | conda |
+|------------------------------------|------------------------------------|
+|Easy to use & create packages       | Not only Python, can use external libraries |
+|Does not track Python version       | Tracks Python version |
+|Complicated with external libraries | Heavy -- use miniconda/mamba; packaging is harder |
 
-- Is it possible to do it without the command line?
+&nbsp;
 
 
-## Odds and ends
+... And try to keep them apart whenever possible
 
-- I suggest to have the environment inside your project directory
+
+::: {.section .transition-slide}
+# Conclusion
+:::
+
+
+## Suggested practices
+
+- Have the environment inside your project directory (default in R)
+- When changing/updating dependencies, commit often and share with your coauthors
+- While project is in progress, do not pin versions if not necessary 
+
+```bash
+# prefer
+(venv) $ python3 -m pip install numpy
+# over
+(venv) $ python3 -m pip install numpy==1.26.2
+```
+
+## Other considerations
+
 - Adding dependencies is always a make-or-buy decision
-  - Don't reinvent the wheel? 
+  - Don't reinvent the wheel -- but sometimes it's necessary 
 - Before adding dependencies, it's good to
   - Consider different tools for the task 
   - Does it work as intended?
   - Check if they are maintained and the size of the user base
 - Be aware of security risks
-
+  - [CI/CD vulnerability in pytorch](https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/) in 2024 
 
 ## References & further reading
 
@@ -181,8 +316,11 @@ For Python:
 - [Code refinery: Reproducible environments and dependencies](https://coderefinery.github.io/python-progression/dependencies/)
 - [Intermediate Research Software Development with Python: virtual environments](https://carpentries-incubator.github.io/python-intermediate-development/12-virtual-environments.html)
 
-## Exercises
+## Hands-on: ideas
+
+TODO: add tiny url for slides
 
 - Start using an environment for an existing project
-- If you're using python `venv`, give `uv` a shot
+- If you're using `venv` or `conda`, try the other in a dummy project
+- If you're using Python `venv`, give `uv` a shot
 
