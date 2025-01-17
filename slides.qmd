@@ -240,7 +240,7 @@ python-dateutil==2.8.2
 six==1.16.0
 ```
 
-Restore a environment from requirements:
+Restore a environment from requirements.txt:
 
 ``` bash
 (venv) $ python3 -m pip install -r requirements.txt
