@@ -11,9 +11,9 @@ editor: visual
 
 ## Why track dependencies
 
--   You want that your code still runs in 2 years
-    -   Your dependencies' functionality may change; ther may be bug fixes
--   One project may lock the version for a specific package
+-   You want your code still to run in 2 years
+    -   Your dependencies' functionality may change; there may be bug fixes
+-   A project might depend on the specific version of a package
     -   But you may want to use newer versions where possible in other projects
 -   Make your tools portable
     -   For yourself
@@ -37,7 +37,7 @@ editor: visual
     -   From where (repository, github)
 -   Metadata are stored in requirements and lock files
     -   They allow anyone to recreate the dependencies in the same way
--   The metadata should be under version control
+-   This metadata should be under version control
     -   So that you can track changes and share with others
 
 ::: {.section .transition-slide}
@@ -240,7 +240,7 @@ python-dateutil==2.8.2
 six==1.16.0
 ```
 
-Restore a environment from requirements:
+Restore a environment from requirements.txt:
 
 ``` bash
 (venv) $ python3 -m pip install -r requirements.txt
@@ -275,7 +275,7 @@ Restore a environment from requirements:
 ```
 
 -   But keep track of exact versions and commit often
-    -   Share with you co-authors
+    -   Share with your co-authors
 
 ## Other considerations
 
