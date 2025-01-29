@@ -5,7 +5,7 @@ affiliation: "Netherlands eScience Center"
 date: 2025-01-30
 format: 
   revealjs:
-    theme: default
+    theme: [default, custom.scss]
     toc: true
     toc-depth: 1
     template-partials:
@@ -33,17 +33,24 @@ editor: visual
 
 ## Why track dependencies
 
--   You want your code still to run in 2 years
-    -   Your dependencies' functionality may change; there may be bugfixes
--   A project might depend on the specific version of a package
-    -   But you may want to use newer versions where possible in other projects
--   Make your tools portable
+::: fragment
+-   You want your code [still to run in 2 years]{.blue}
+    - Functionality change; bugfixes
+::: 
+
+:::fragment
+-   A project might depend on the [specific version]{.blue} of a package
+    - Other projects could use newer versions
+:::
+
+::: fragment
+-   Make your tools [portable]{.blue}
     -   For yourself
     -   For your co-authors
+:::
 
-<!-- do not want to install each package separately, try if the code runs, and repeat -->
 
-## The high-level idea
+## The [high-level]{.blue} idea
 
 | DIY Project | R/Python Project |
 |------------------------------------|------------------------------------|
@@ -52,15 +59,24 @@ editor: visual
 | 🧰 Toolboxes (the drill box, the box of screwdrivers) | Packages (ggplot2, etc.) |
 | 🪑 Workbench | Environment: `renv`, `venv` |
 
-## The environment is an isolated workspace with all tools
+## The environment is an [isolated workspace with all tools]{.blue}
 
--   An environment is defined by a file with metadata on
+::: fragment
+-   An environment is defined by a file with [metadata]{.blue} on
     -   Which packages, which versions, from where
     -   From where (repository, github)
--   Metadata are stored in requirements and lock files
-    -   They allow anyone to recreate the dependencies in the same way
--   This metadata should be under version control
+:::
+
+::: fragment
+-   Metadata are stored in [requirements and lock files]{.blue}
+    -   $\Rightarrow$ Recreate the dependencies in the same way
+:::
+
+::: fragment
+-   This metadata should be under [version control]{.blue}
     -   So that you can track changes and share with others
+:::
+
 
 ::: {.section .transition-slide}
 # R: Using `renv`
@@ -107,7 +123,7 @@ renv::init(bare = TRUE)
 ::: incremental
 This creates
 
--   `renv/` -- A new folder that serves as the **library** of packages for your project.
+-   `renv/` -- A new folder that serves as the [**library**]{.blue} of packages for your project.
 -   `.Rprofile` -- This file makes sure that once `renv` is turned on for a project, it stays on.
 :::
 ::::
@@ -149,7 +165,7 @@ yields something like
 ```
 :::
 
-## The lock file records dependencies only when used in scripts
+## The lock file records dependencies [only when used in scripts]{.blue}
 
 ::: fragment
 1.  Install new packages with
@@ -183,13 +199,15 @@ renv::snapshot()
 # Python: Using `venv` and `pip`
 
 ![Python Environment Hell from XKCD (Creative Commons Attribution-NonCommercial 2.5 License)](python-environment-hell.png){width="50%"}
+
+
 :::
 
 ## Overview
 
--   PyPI is the Python Package Index, the analogue to R's CRAN
+-   PyPI is the [Python Package Index]{.blue}, the analogue to R's CRAN
     -   But CRAN reviews submissions while PyPI does not
--   `pip` is the Python package manager and interacts with PyPI
+-   `pip` is the Python [package manager]{.blue} and interacts with PyPI
     -   Other tools do the same job
 -   `pip` + `venv` are available by default for Python 3.3+
 
@@ -289,7 +307,6 @@ To display information about all installed packages
 ## Creating `requirements.txt` files
 
 ::: fragment
-Run
 
 ``` bash
 (venv) $ python3 -m pip freeze > requirements.txt
@@ -297,7 +314,7 @@ Run
 :::
 
 ::: fragment
-We can inspect the file
+We can [inspect]{.blue} the file
 
 ``` bash
 (venv) $ cat requirements.txt
@@ -319,7 +336,7 @@ six==1.16.0
 :::
 
 ::: fragment
-Restore an environment from `requirements.txt`
+[Restore]{.blue} an environment from `requirements.txt`
 
 ``` bash
 (venv) $ python3 -m pip install -r requirements.txt
@@ -328,15 +345,17 @@ Restore an environment from `requirements.txt`
 
 ## PyPI vs conda
 
+:::fragment
 | PyPI | conda |
 |------------------------------------|------------------------------------|
-| [Easy to use & create packages]{style="color:green;"} | [Not only Python, can use external libraries]{style="color:green;"} |
-| [Does not track Python version]{style="color:red;"} | [Tracks Python version]{style="color:green;"} |
-| [Complicated with external libraries]{style="color:red;"} | [Heavy -- use miniconda/mamba; packaging is harder]{style="color:red;"} |
+| [Easy to use & create packages]{.green} | [Not only Python, can use external libraries]{.green} |
+| [Does not track Python version]{.red} | [Tracks Python version]{.green} |
+| [Complicated with external libraries]{.red} | [Heavy -- use miniconda/mamba; packaging is harder]{.red} |
+:::
 
- 
-
-... And try to keep them apart whenever possible
+:::fragment
+... And try to [keep them apart]{.blue} whenever possible
+:::
 
 ::: {.section .transition-slide}
 # Conclusion
@@ -344,8 +363,12 @@ Restore an environment from `requirements.txt`
 
 ## Good practices
 
--   Have the environment inside your project directory
--   When adding new dependencies, do not pin versions:
+:::fragment
+-   Have the environment [inside your project directory]{.blue}
+:::
+
+:::fragment
+-   When adding new dependencies, [do not pin versions]{.green}:
 
 ``` bash
 # prefer
@@ -353,21 +376,31 @@ Restore an environment from `requirements.txt`
 # over
 (venv) $ python3 -m pip install numpy==1.26.2
 ```
+:::
 
--   But keep track of versions used and commit often
+:::fragment
+-   But [keep track of exact versions]{.red} in lock file and commit often
     -   Share with your co-authors
+:::
 
 ## Other considerations
 
--   Adding dependencies is always a make-or-buy decision
+:::fragment
+-   Adding dependencies is always a [make-or-buy]{.blue} decision
     -   Don't reinvent the wheel?
--   Before adding dependencies, it's good to
+:::
+
+:::fragment
+-   [Before adding dependencies]{.blue}, it's good to
     -   Consider different tools for the task
-    -   Does it work as intended?
-    -   Check if they are maintained and the size of the user base
--   Be aware of security risks
-    -   [CI/CD vulnerability in pytorch](https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/) in 2024
-    -   [Arbitrary code execution through public ML models](https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/)
+    -   Does it [work as intended]{.blue}?
+    -   Check if they are [maintained]{.blue} and the size of the user base
+:::
+
+:::fragment
+-   Be aware of [security risks]{.blue}
+    -   [PyTorch vulnerability](https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/), [ML models may execute arbitrary code](https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/)
+:::
 
 ## References & further reading
 

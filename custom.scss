@@ -1,0 +1,15 @@
+/*-- scss:defaults --*/
+
+// Define your custom colors
+$custom-blue: #4477AA;
+$custom-red: #EE6677;
+$custom-green: #228833;
+
+/*-- scss:rules --*/
+
+// Override the default color keywords
+.reveal {
+  .blue { color: $custom-blue !important; }
+  .red { color: $custom-red !important; }
+  .green { color: $custom-green !important; }
+}
