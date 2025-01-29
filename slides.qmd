@@ -15,35 +15,26 @@ format:
 editor: visual
 ---
 
+## Overview
 
-## Overview 
-
-::: {.columns}
-
+::::: columns
 ::: {.column width="60%"}
-
-
 ```{=html}
 <div id='toc'></div>
 ```
-
 :::
 
 ::: {.column width="40%"}
-
 ### Link to slides
 
-![](qrcode.png){width=80%}
+![URL: https://edu.nl/4xx6w](qrcode.svg){width="80%" }
 :::
-
-:::
-
-
+:::::
 
 ## Why track dependencies
 
 -   You want your code still to run in 2 years
-    -   Your dependencies' functionality may change; there may be bug fixes
+    -   Your dependencies' functionality may change; there may be bugfixes
 -   A project might depend on the specific version of a package
     -   But you may want to use newer versions where possible in other projects
 -   Make your tools portable
@@ -77,7 +68,7 @@ editor: visual
 
 ## Create a new project in RStudio
 
-::: {.fragment}
+::: fragment
 1.  Install `renv` globally with
 
 ``` r
@@ -85,24 +76,18 @@ install.packages("renv")
 ```
 :::
 
-
-::: {.fragment}
+::: fragment
 2.  Create new project with version control (git)\
     (File -\> New Project -\> Version Control -\> Git)
 :::
 
-
-
-::: {.fragment}
+::: fragment
 3.  Open the project in a new session
 :::
 
-
 ## Install and track packages with `renv`
 
-
-
-::: {.fragment}
+::: fragment
 4.  Attach `renv` to your R session with
 
 ``` r
@@ -110,7 +95,7 @@ library(renv)
 ```
 :::
 
-::: {.fragment}
+::: fragment
 5.  Initialize the renv
 
 ``` r
@@ -118,16 +103,14 @@ renv::init(bare = TRUE)
 ```
 :::
 
-::: {.fragment}
-::: {.incremental}
-
-This creates 
+:::: fragment
+::: incremental
+This creates
 
 -   `renv/` -- A new folder that serves as the **library** of packages for your project.
 -   `.Rprofile` -- This file makes sure that once `renv` is turned on for a project, it stays on.
 :::
-:::
-
+::::
 
 ## Create lock file to log project state
 
@@ -137,7 +120,7 @@ renv::snapshot()
 
 yields something like
 
-::: {.fragment}
+::: fragment
 ``` json
 {
   "R": {
@@ -168,7 +151,7 @@ yields something like
 
 ## The lock file records dependencies only when used in scripts
 
-::: {.fragment}
+::: fragment
 1.  Install new packages with
 
 ``` r
@@ -176,7 +159,7 @@ renv::install(dplyr)
 ```
 :::
 
-::: {.fragment}
+::: fragment
 2.  Use it in a script
 
 ``` r
@@ -184,7 +167,7 @@ library(dplyr) # or require(dplyr)
 ```
 :::
 
-::: {.fragment}
+::: fragment
 3.  Update lock file
 
 ``` r
@@ -205,28 +188,26 @@ renv::snapshot()
 ## Overview
 
 -   PyPI is the Python Package Index, the analogue to R's CRAN
-    - But CRAN reviews submissions while PyPI does not 
+    -   But CRAN reviews submissions while PyPI does not
 -   `pip` is the Python package manager and interacts with PyPI
-    - Other tools do the same job
+    -   Other tools do the same job
 -   `pip` + `venv` are available by default for Python 3.3+
 
 ## Getting started
 
-
 ```{=html}
 <br/><br/> 
 ```
 
-::: {.fragment}
+::: fragment
 Use the command line: a terminal or from an IDE (VS Code)
 :::
 
-
 ```{=html}
 <br/><br/> 
 ```
 
-::: {.fragment}
+::: fragment
 Make sure you can invoke Python
 
 ``` bash
@@ -237,31 +218,27 @@ $ python --version # on Windows — Windows installation comes with a python.exe
 
 ## Creating the virtual environment
 
-::: {.fragment}
+::: fragment
 Run
 
 ``` bash
 $ python3 -m venv venv
 ```
-
-
 :::
 
-::: {.fragment}
-::: {.incremental}
+:::: fragment
+::: incremental
 What does this do?
 
 -   Creates a folder `venv` to which packages are installed
--   The `-m` flag calls the `main` part of the `venv` module (not so important)
-
+-   (The `-m` flag calls the `main` part of the `venv` module)
 :::
-:::
+::::
 
-::: {.fragment}
+:::: fragment
 Activate the virtual environment
 
-
-:::: {.panel-tabset}
+::: panel-tabset
 ## Windows
 
 ``` powershell
@@ -269,33 +246,31 @@ $ source venv/Scripts/activate
 (venv) $
 ```
 
-
 ## Mac/Linux
 
 ``` bash
 $ source venv/bin/activate
 (venv) $
 ```
-::::
 :::
+::::
 
 ## Install packages with pip
 
-::: {.fragment}
+::: fragment
 Run
+
 ``` bash
 (venv) $ python3 -m pip install numpy
 (venv) $ python3 -m pip install matplotlib
 ```
-
 
 ```{=html}
 <br/><br/> 
 ```
 :::
 
-
-::: {.fragment}
+::: fragment
 To display information about some installed packages
 
 ``` bash
@@ -303,7 +278,7 @@ To display information about some installed packages
 ```
 :::
 
-::: {.fragment}
+::: fragment
 To display information about all installed packages
 
 ``` bash
@@ -311,18 +286,17 @@ To display information about all installed packages
 ```
 :::
 
-
-
 ## Creating `requirements.txt` files
 
-::: {.fragment}
+::: fragment
 Run
+
 ``` bash
 (venv) $ python3 -m pip freeze > requirements.txt
 ```
 :::
 
-::: {.fragment}
+::: fragment
 We can inspect the file
 
 ``` bash
@@ -344,7 +318,7 @@ six==1.16.0
 ```
 :::
 
-::: {.fragment}
+::: fragment
 Restore an environment from `requirements.txt`
 
 ``` bash
@@ -357,7 +331,7 @@ Restore an environment from `requirements.txt`
 | PyPI | conda |
 |------------------------------------|------------------------------------|
 | [Easy to use & create packages]{style="color:green;"} | [Not only Python, can use external libraries]{style="color:green;"} |
-| [Does not track Python version]{style="color:red;"} | [Tracks Python version]{style="color:green;"}  |
+| [Does not track Python version]{style="color:red;"} | [Tracks Python version]{style="color:green;"} |
 | [Complicated with external libraries]{style="color:red;"} | [Heavy -- use miniconda/mamba; packaging is harder]{style="color:red;"} |
 
  
@@ -371,7 +345,7 @@ Restore an environment from `requirements.txt`
 ## Good practices
 
 -   Have the environment inside your project directory
--   While project is in progress, do not pin versions
+-   When adding new dependencies, do not pin versions:
 
 ``` bash
 # prefer
@@ -380,7 +354,7 @@ Restore an environment from `requirements.txt`
 (venv) $ python3 -m pip install numpy==1.26.2
 ```
 
--   But keep track of exact versions and commit often
+-   But keep track of versions used and commit often
     -   Share with your co-authors
 
 ## Other considerations
@@ -393,23 +367,22 @@ Restore an environment from `requirements.txt`
     -   Check if they are maintained and the size of the user base
 -   Be aware of security risks
     -   [CI/CD vulnerability in pytorch](https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/) in 2024
-    - [Arbitrary code execution through public ML models](https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/)
+    -   [Arbitrary code execution through public ML models](https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/)
 
 ## References & further reading
 
 For R:
 
 -   TSB Research Support Team: [Intermediate R](https://gitlab.uvt.nl/tsb-rst/intermediate-level-r-course-for-social-sciences)
--  RStudio:  [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html)
+-   RStudio: [Introduction to renv](https://rstudio.github.io/renv/articles/renv.html)
 
 For Python:
 
--  Code Refinery: [Reproducible environments and dependencies](https://coderefinery.github.io/python-progression/dependencies/)
--  Intermediate Research Software Development with Python: [Virtual environments](https://carpentries-incubator.github.io/python-intermediate-development/12-virtual-environments.html)
+-   Code Refinery: [Reproducible environments and dependencies](https://coderefinery.github.io/python-progression/dependencies/)
+-   Intermediate Research Software Development with Python: [Virtual environments](https://carpentries-incubator.github.io/python-intermediate-development/12-virtual-environments.html)
 
 ## Hands-on: ideas
 
-TODO: add tiny url for slides
 
 -   Start using an environment for an existing project
 -   Play around in a dummy project
