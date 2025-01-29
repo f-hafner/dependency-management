@@ -116,7 +116,7 @@
     "href": "slides.html#other-considerations",
     "title": "Dependency Management in R and Python",
     "section": "Other considerations",
-    "text": "Other considerations\n\n\nAdding dependencies is always a make-or-buy decision\n\nDon’t reinvent the wheel?\n\n\n\n\n\nBefore adding dependencies, it’s good to\n\nConsider different tools for the task\nDoes it work as intended?\nCheck if they are maintained and the size of the user base\n\n\n\n\n\nBe aware of security risks\n\nPyTorch vulnerability, ML models may execute arbitrary code"
+    "text": "Other considerations\n\n\nAdding dependencies is always a make-or-buy decision\n\nDon’t reinvent the wheel?\n\n\n\n\n\nBefore adding dependencies,\n\nMake sure it works as intended\nCheck if they are maintained and the size of the user base\n\n\n\n\n\nBe aware of security risks\n\nPyTorch vulnerability\nML models may execute arbitrary code"
   },
   {
     "objectID": "slides.html#references-further-reading",

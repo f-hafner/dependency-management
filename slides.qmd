@@ -391,15 +391,15 @@ six==1.16.0
 :::
 
 :::fragment
--   [Before adding dependencies]{.blue}, it's good to
-    -   Consider different tools for the task
-    -   Does it [work as intended]{.blue}?
+-   [Before adding dependencies]{.blue}, 
+    -   Make sure it [works as intended]{.blue}
     -   Check if they are [maintained]{.blue} and the size of the user base
 :::
 
 :::fragment
 -   Be aware of [security risks]{.blue}
-    -   [PyTorch vulnerability](https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/), [ML models may execute arbitrary code](https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/)
+    - [PyTorch vulnerability](https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/)
+    - [ML models may execute arbitrary code](https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/)
 :::
 
 ## References & further reading
