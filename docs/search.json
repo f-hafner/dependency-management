@@ -4,14 +4,14 @@
     "href": "slides.html#overview",
     "title": "Dependency Management in R and Python",
     "section": "Overview",
-    "text": "Overview\n\n\n\n\nLink to slides"
+    "text": "Overview\n\n\n\n\nLink to slides\n\n\n\nURL: https://edu.nl/4xx6w"
   },
   {
     "objectID": "slides.html#why-track-dependencies",
     "href": "slides.html#why-track-dependencies",
     "title": "Dependency Management in R and Python",
     "section": "Why track dependencies",
-    "text": "Why track dependencies\n\nYou want your code still to run in 2 years\n\nYour dependencies’ functionality may change; there may be bug fixes\n\nA project might depend on the specific version of a package\n\nBut you may want to use newer versions where possible in other projects\n\nMake your tools portable\n\nFor yourself\nFor your co-authors"
+    "text": "Why track dependencies\n\n\nYou want your code still to run in 2 years\n\nFunctionality change; bugfixes\n\n\n\n\n\nA project might depend on the specific version of a package\n\nOther projects could use newer versions\n\n\n\n\n\nMake your tools portable\n\nFor yourself\nFor your co-authors"
   },
   {
     "objectID": "slides.html#the-high-level-idea",
@@ -25,7 +25,7 @@
     "href": "slides.html#the-environment-is-an-isolated-workspace-with-all-tools",
     "title": "Dependency Management in R and Python",
     "section": "The environment is an isolated workspace with all tools",
-    "text": "The environment is an isolated workspace with all tools\n\nAn environment is defined by a file with metadata on\n\nWhich packages, which versions, from where\nFrom where (repository, github)\n\nMetadata are stored in requirements and lock files\n\nThey allow anyone to recreate the dependencies in the same way\n\nThis metadata should be under version control\n\nSo that you can track changes and share with others"
+    "text": "The environment is an isolated workspace with all tools\n\n\nAn environment is defined by a file with metadata on\n\nWhich packages, which versions, from where\nFrom where (repository, github)\n\n\n\n\n\nMetadata are stored in requirements and lock files\n\n\\(\\Rightarrow\\) Recreate the dependencies in the same way\n\n\n\n\n\nThis metadata should be under version control\n\nSo that you can track changes and share with others"
   },
   {
     "objectID": "slides.html#create-a-new-project-in-rstudio",
@@ -81,7 +81,7 @@
     "href": "slides.html#creating-the-virtual-environment",
     "title": "Dependency Management in R and Python",
     "section": "Creating the virtual environment",
-    "text": "Creating the virtual environment\n\nRun\n$ python3 -m venv venv\n\n\n\nWhat does this do?\n\nCreates a folder venv to which packages are installed\nThe -m flag calls the main part of the venv module (not so important)\n\n\n\n\nActivate the virtual environment\n\nWindowsMac/Linux\n\n\n$ source venv/Scripts/activate\n(venv) $\n\n\n$ source venv/bin/activate\n(venv) $"
+    "text": "Creating the virtual environment\n\nRun\n$ python3 -m venv venv\n\n\n\nWhat does this do?\n\nCreates a folder venv to which packages are installed\n(The -m flag calls the main part of the venv module)\n\n\n\n\nActivate the virtual environment\n\nWindowsMac/Linux\n\n\n$ source venv/Scripts/activate\n(venv) $\n\n\n$ source venv/bin/activate\n(venv) $"
   },
   {
     "objectID": "slides.html#install-packages-with-pip",
@@ -95,28 +95,28 @@
     "href": "slides.html#creating-requirements.txt-files",
     "title": "Dependency Management in R and Python",
     "section": "Creating requirements.txt files",
-    "text": "Creating requirements.txt files\n\nRun\n(venv) $ python3 -m pip freeze &gt; requirements.txt\n\n\nWe can inspect the file\n(venv) $ cat requirements.txt\ncontourpy==1.2.0\ncycler==0.12.1\nfonttools==4.45.0\nkiwisolver==1.4.5\nmatplotlib==3.8.2\nnumpy==1.26.2\npackaging==23.2\nPillow==10.1.0\npyparsing==3.1.1\npython-dateutil==2.8.2\nsix==1.16.0\n\n\nRestore an environment from requirements.txt\n(venv) $ python3 -m pip install -r requirements.txt"
+    "text": "Creating requirements.txt files\n\n(venv) $ python3 -m pip freeze &gt; requirements.txt\n\n\nWe can inspect the file\n(venv) $ cat requirements.txt\ncontourpy==1.2.0\ncycler==0.12.1\nfonttools==4.45.0\nkiwisolver==1.4.5\nmatplotlib==3.8.2\nnumpy==1.26.2\npackaging==23.2\nPillow==10.1.0\npyparsing==3.1.1\npython-dateutil==2.8.2\nsix==1.16.0\n\n\nRestore an environment from requirements.txt\n(venv) $ python3 -m pip install -r requirements.txt"
   },
   {
     "objectID": "slides.html#pypi-vs-conda",
     "href": "slides.html#pypi-vs-conda",
     "title": "Dependency Management in R and Python",
     "section": "PyPI vs conda",
-    "text": "PyPI vs conda\n\n\n\n\n\n\n\nPyPI\nconda\n\n\n\n\nEasy to use & create packages\nNot only Python, can use external libraries\n\n\nDoes not track Python version\nTracks Python version\n\n\nComplicated with external libraries\nHeavy – use miniconda/mamba; packaging is harder\n\n\n\n \n… And try to keep them apart whenever possible"
+    "text": "PyPI vs conda\n\n\n\n\n\n\n\n\nPyPI\nconda\n\n\n\n\nEasy to use & create packages\nNot only Python, can use external libraries\n\n\nDoes not track Python version\nTracks Python version\n\n\nComplicated with external libraries\nHeavy – use miniconda/mamba; packaging is harder\n\n\n\n\n\n… And try to keep them apart whenever possible"
   },
   {
     "objectID": "slides.html#good-practices",
     "href": "slides.html#good-practices",
     "title": "Dependency Management in R and Python",
     "section": "Good practices",
-    "text": "Good practices\n\nHave the environment inside your project directory\nWhile project is in progress, do not pin versions\n\n# prefer\n(venv) $ python3 -m pip install numpy\n# over\n(venv) $ python3 -m pip install numpy==1.26.2\n\nBut keep track of exact versions and commit often\n\nShare with your co-authors"
+    "text": "Good practices\n\n\nHave the environment inside your project directory\n\n\n\n\nWhen adding new dependencies, do not pin versions:\n\n# prefer\n(venv) $ python3 -m pip install numpy\n# over\n(venv) $ python3 -m pip install numpy==1.26.2\n\n\n\nBut keep track of exact versions in lock file and commit often\n\nShare with your co-authors"
   },
   {
     "objectID": "slides.html#other-considerations",
     "href": "slides.html#other-considerations",
     "title": "Dependency Management in R and Python",
     "section": "Other considerations",
-    "text": "Other considerations\n\nAdding dependencies is always a make-or-buy decision\n\nDon’t reinvent the wheel?\n\nBefore adding dependencies, it’s good to\n\nConsider different tools for the task\nDoes it work as intended?\nCheck if they are maintained and the size of the user base\n\nBe aware of security risks\n\nCI/CD vulnerability in pytorch in 2024\nArbitrary code execution through public ML models"
+    "text": "Other considerations\n\n\nAdding dependencies is always a make-or-buy decision\n\nDon’t reinvent the wheel?\n\n\n\n\n\nBefore adding dependencies, it’s good to\n\nConsider different tools for the task\nDoes it work as intended?\nCheck if they are maintained and the size of the user base\n\n\n\n\n\nBe aware of security risks\n\nPyTorch vulnerability, ML models may execute arbitrary code"
   },
   {
     "objectID": "slides.html#references-further-reading",
@@ -130,6 +130,6 @@
     "href": "slides.html#hands-on-ideas",
     "title": "Dependency Management in R and Python",
     "section": "Hands-on: ideas",
-    "text": "Hands-on: ideas\nTODO: add tiny url for slides\n\nStart using an environment for an existing project\nPlay around in a dummy project\n\nIf you’re using pip or conda, try the other, or try uv"
+    "text": "Hands-on: ideas\n\nStart using an environment for an existing project\nPlay around in a dummy project\n\nIf you’re using pip or conda, try the other, or try uv"
   }
 ]
