@@ -296,7 +296,7 @@ Flavio Hafner
 <ul>
 <li>An environment is defined by a file with <span class="blue">metadata</span> on
 <ul>
-<li>Which packages, which versions, from where</li>
+<li>Which packages, which versions</li>
 <li>From where (repository, github)</li>
 </ul></li>
 </ul>
@@ -430,17 +430,27 @@ Flavio Hafner
 
 <section id="overview-1" class="slide level2">
 <h2>Overview</h2>
+<div class="fragment">
 <ul>
 <li>PyPI is the <span class="blue">Python Package Index</span>, the analogue to R’s CRAN
 <ul>
 <li>But CRAN reviews submissions while PyPI does not</li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><code>pip</code> is the Python <span class="blue">package manager</span> and interacts with PyPI
 <ul>
 <li>Other tools do the same job</li>
 </ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li><code>pip</code> + <code>venv</code> are available by default for Python 3.3+</li>
 </ul>
+</div>
 </section>
 <section id="getting-started" class="slide level2">
 <h2>Getting started</h2>
@@ -577,6 +587,11 @@ Flavio Hafner
 </div>
 <div class="fragment">
 <ul>
+<li>In Python, <span class="blue">keep</span> your base environment <span class="blue">clean</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
 <li>When adding new dependencies, <span class="green">do not pin versions</span>:</li>
 </ul>
 <div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a></a><span class="co"># prefer</span></span>
@@ -607,7 +622,7 @@ Flavio Hafner
 <ul>
 <li><span class="blue">Before adding dependencies</span>,
 <ul>
-<li>Make sure it <span class="blue">works as intended</span></li>
+<li>Make sure they <span class="blue">work as intended</span></li>
 <li>Check if they are <span class="blue">maintained</span> and the size of the user base</li>
 </ul></li>
 </ul>
@@ -616,7 +631,7 @@ Flavio Hafner
 <ul>
 <li>Be aware of <span class="blue">security risks</span>
 <ul>
-<li><a href="https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/">PyTorch vulnerability</a></li>
+<li><a href="https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/">PyTorch vulnerability</a> in 2024</li>
 <li><a href="https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/">ML models may execute arbitrary code</a></li>
 </ul></li>
 </ul>

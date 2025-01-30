@@ -25,7 +25,7 @@
     "href": "slides.html#the-environment-is-an-isolated-workspace-with-all-tools",
     "title": "Dependency Management in R and Python",
     "section": "The environment is an isolated workspace with all tools",
-    "text": "The environment is an isolated workspace with all tools\n\n\nAn environment is defined by a file with metadata on\n\nWhich packages, which versions, from where\nFrom where (repository, github)\n\n\n\n\n\nMetadata are stored in requirements and lock files\n\n\\(\\Rightarrow\\) Recreate the dependencies in the same way\n\n\n\n\n\nThis metadata should be under version control\n\nSo that you can track changes and share with others"
+    "text": "The environment is an isolated workspace with all tools\n\n\nAn environment is defined by a file with metadata on\n\nWhich packages, which versions\nFrom where (repository, github)\n\n\n\n\n\nMetadata are stored in requirements and lock files\n\n\\(\\Rightarrow\\) Recreate the dependencies in the same way\n\n\n\n\n\nThis metadata should be under version control\n\nSo that you can track changes and share with others"
   },
   {
     "objectID": "slides.html#create-a-new-project-in-rstudio",
@@ -67,7 +67,7 @@
     "href": "slides.html#overview-1",
     "title": "Dependency Management in R and Python",
     "section": "Overview",
-    "text": "Overview\n\nPyPI is the Python Package Index, the analogue to R’s CRAN\n\nBut CRAN reviews submissions while PyPI does not\n\npip is the Python package manager and interacts with PyPI\n\nOther tools do the same job\n\npip + venv are available by default for Python 3.3+"
+    "text": "Overview\n\n\nPyPI is the Python Package Index, the analogue to R’s CRAN\n\nBut CRAN reviews submissions while PyPI does not\n\n\n\n\n\npip is the Python package manager and interacts with PyPI\n\nOther tools do the same job\n\n\n\n\n\npip + venv are available by default for Python 3.3+"
   },
   {
     "objectID": "slides.html#getting-started",
@@ -109,14 +109,14 @@
     "href": "slides.html#good-practices",
     "title": "Dependency Management in R and Python",
     "section": "Good practices",
-    "text": "Good practices\n\n\nHave the environment inside your project directory\n\n\n\n\nWhen adding new dependencies, do not pin versions:\n\n# prefer\n(venv) $ python3 -m pip install numpy\n# over\n(venv) $ python3 -m pip install numpy==1.26.2\n\n\n\nBut keep track of exact versions in lock file and commit often\n\nShare with your co-authors"
+    "text": "Good practices\n\n\nHave the environment inside your project directory\n\n\n\n\nIn Python, keep your base environment clean\n\n\n\n\nWhen adding new dependencies, do not pin versions:\n\n# prefer\n(venv) $ python3 -m pip install numpy\n# over\n(venv) $ python3 -m pip install numpy==1.26.2\n\n\n\nBut keep track of exact versions in lock file and commit often\n\nShare with your co-authors"
   },
   {
     "objectID": "slides.html#other-considerations",
     "href": "slides.html#other-considerations",
     "title": "Dependency Management in R and Python",
     "section": "Other considerations",
-    "text": "Other considerations\n\n\nAdding dependencies is always a make-or-buy decision\n\nDon’t reinvent the wheel?\n\n\n\n\n\nBefore adding dependencies,\n\nMake sure it works as intended\nCheck if they are maintained and the size of the user base\n\n\n\n\n\nBe aware of security risks\n\nPyTorch vulnerability\nML models may execute arbitrary code"
+    "text": "Other considerations\n\n\nAdding dependencies is always a make-or-buy decision\n\nDon’t reinvent the wheel?\n\n\n\n\n\nBefore adding dependencies,\n\nMake sure they work as intended\nCheck if they are maintained and the size of the user base\n\n\n\n\n\nBe aware of security risks\n\nPyTorch vulnerability in 2024\nML models may execute arbitrary code"
   },
   {
     "objectID": "slides.html#references-further-reading",

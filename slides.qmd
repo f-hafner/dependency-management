@@ -63,7 +63,7 @@ editor: visual
 
 ::: fragment
 -   An environment is defined by a file with [metadata]{.blue} on
-    -   Which packages, which versions, from where
+    -   Which packages, which versions
     -   From where (repository, github)
 :::
 
@@ -205,11 +205,19 @@ renv::snapshot()
 
 ## Overview
 
+::: fragment
 -   PyPI is the [Python Package Index]{.blue}, the analogue to R's CRAN
     -   But CRAN reviews submissions while PyPI does not
+:::
+
+::: fragment
 -   `pip` is the Python [package manager]{.blue} and interacts with PyPI
     -   Other tools do the same job
+:::
+
+::: fragment
 -   `pip` + `venv` are available by default for Python 3.3+
+:::
 
 ## Getting started
 
@@ -363,11 +371,16 @@ six==1.16.0
 
 ## Good practices
 
-:::fragment
+::: fragment
 -   Have the environment [inside your project directory]{.blue}
 :::
 
-:::fragment
+::: fragment
+- In Python, [keep]{.blue} your base environment [clean]{.blue}
+:::
+
+
+::: fragment
 -   When adding new dependencies, [do not pin versions]{.green}:
 
 ``` bash
@@ -392,13 +405,13 @@ six==1.16.0
 
 :::fragment
 -   [Before adding dependencies]{.blue}, 
-    -   Make sure it [works as intended]{.blue}
+    -   Make sure they [work as intended]{.blue}
     -   Check if they are [maintained]{.blue} and the size of the user base
 :::
 
 :::fragment
 -   Be aware of [security risks]{.blue}
-    - [PyTorch vulnerability](https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/)
+    - [PyTorch vulnerability](https://johnstawinski.com/2024/01/11/playing-with-fire-how-we-executed-a-critical-supply-chain-attack-on-pytorch/) in 2024
     - [ML models may execute arbitrary code](https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/)
 :::
 
